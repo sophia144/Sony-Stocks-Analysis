@@ -1,16 +1,21 @@
 import pandas as pd
+import matplotlib.pyplot as plt
 
 #importing and cleaning
 df = (pd.read_csv('sony_stocks.csv'))
 df = df.rename(columns={"Close/Last": "Closing"})
 df = df.astype({'Date': 'datetime64[ns]'})
 
-df["Closing"] = df["Closing"].str.replace('$', '')
-df["Open"] = df["Open"].str.replace('$', '')
-df["High"] = df["High"].str.replace('$', '')
-df["Low"] = df["Low"].str.replace('$', '')
+dollar_cols = ['Closing', 'Open', 'High', 'Low']
+for col in dollar_cols:
+    df[col] = df[col].str.replace('$', '')
+    df = df.astype({col: 'Float64'})
 
 df.sort_values(by="Date", inplace=True, ignore_index=True)
 df.to_csv('sony_stocks_cleaned.csv', index=False)
 
-print(df)
+x = df["Date"].values
+y = df["Closing"].values
+
+plt.plot(x, y)
+plt.show()
