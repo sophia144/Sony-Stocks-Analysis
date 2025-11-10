@@ -18,4 +18,10 @@ x = df["Date"].values
 y = df["Closing"].values
 
 plt.plot(x, y)
+
+plt.xlabel("Date")
+plt.ylabel("Closing ($)")
+plt.title("Sony Stocks 24-25")
+plt.grid(True)
+
 plt.show()

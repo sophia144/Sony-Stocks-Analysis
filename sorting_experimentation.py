@@ -6,24 +6,25 @@ from time import perf_counter
 #reads the dataframe
 df = (pd.read_csv('sony_stocks_cleaned.csv'))
 df["Daily_Change"] = df["Closing"].diff()
-diff_array = np.array(df["Daily_Change"])
 
 #function to calculate how long it takes to sort an array with a specified number of items
 def sort_time_calc(n, array):
+    sub_array = array[1:n+1]
+
     start_time = perf_counter()
-    np.sort(array[1:n+1])
+    np.sort(sub_array)
     end_time = perf_counter()
+
     sort_time = end_time - start_time
-    sort_time_list.append([n, sort_time])
+    x.append(n)
+    y.append(sort_time)
 
-sort_time_list = []
+x = []
+y = []
 
+array = np.array(df["Daily_Change"])
 for n in range(7, 365):
-    sort_time_calc(n, diff_array)
-
-#splits the 2D output into x and y values
-x = [value[0] for value in sort_time_list]
-y = [value[1] for value in sort_time_list]
+    sort_time_calc(n, array)
 
 #plots the results
 plt.plot(x, y)
