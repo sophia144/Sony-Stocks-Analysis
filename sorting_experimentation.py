@@ -16,7 +16,7 @@ for n in range(7, 365):
     sub_array = array[1:n+1]
 
     start_time = perf_counter()
-    np.sort(sub_array)
+    sorted(sub_array)
     end_time = perf_counter()
 
     sort_time = end_time - start_time
@@ -24,7 +24,7 @@ for n in range(7, 365):
     y.append(float(sort_time))
 
 #plots the results
-plt.plot(x, y)
+plt.plot(np.array(x), np.array(y))
 
 plt.xlabel("n", family='monospace')
 plt.ylabel("Time (s)", family='monospace')
